@@ -5,7 +5,7 @@ docker rmi rollrat/todo-backend:latest
 docker pull rollrat/todo-backend:latest
 
 # download env-file for docker
-aws s3api get-object --bucket todo-backend-config --key .env.docker.prod .env.docker.prod
+aws s3api get-object --bucket todo-config --key .env.docker.prod .env.docker.prod
 
 # setup docker
 docker create --env-file ./.env.docker.prod \
