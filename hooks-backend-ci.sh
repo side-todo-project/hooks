@@ -4,10 +4,15 @@ docker stop todobackend && docker rm $_
 docker rmi rollrat/todo-backend:latest
 docker pull rollrat/todo-backend:latest
 
+# download env-file for docker
+aws s3api get-object --bucket todo-config --key .env.docker.prod .env.docker.prod
+
 # setup docker
-docker create --name todobackend \
-              --network host \
-              rollrat/todo-backend:latest
+docker create --env-file ./.env.docker.prod \
+                  --name todobackend \
+                  --network host \
+                  --add-host host.docker.internal:host-gateway \
+                  rollrat/todo-backend:latest
 
 # download env & copy to container
 aws s3api get-object --bucket todo-config --key .env.docker.prod .env
