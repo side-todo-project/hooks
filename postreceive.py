@@ -4,7 +4,7 @@ import os
 app = Flask(__name__)
 
 @app.route('/postreceive_frontend', methods=['POST'])
-def back():
+def front():
     os.system("./hooks-frontend-ci.sh")
     return 'Success!'
 
